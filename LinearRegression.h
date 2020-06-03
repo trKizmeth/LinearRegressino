@@ -3,16 +3,24 @@
 
 #include "Arduino.h"
 
+#define maxValues
+
 class LinearRegression {
     public:
         LinearRegression();
         LinearRegression(double min, double max);
         void learn(double x, double y);
+        void dynamicFilteredLearn(double x, double y);
         double calculate(double x);
         double correlation();
         void getValues(double values[]);
         void reset();
+        boolean dynamicIsValid = false; 
+
     private:
+        double mmX[maxValues];
+        double mmY[maxValues];
+        int mmli =0;
         double meanX = 0;
         double meanX2 = 0; //mean x²
         double varX = 0;
