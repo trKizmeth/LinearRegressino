@@ -48,22 +48,22 @@ void LinearRegression::dynamicFilteredLearn(double x, double y){
         }
     }
     
-    if (n<maxValues) {
+    if (n<MAXVALUES) {
         n++;
         dynamicIsValid = false;
     } else {
         dynamicIsValid = true;
     }
 
-    meanX = meanX + (x/maxValues) - meanX/maxValues;
-    meanX2 = meanX2 + ((x*x)/maxValues) - meanX2/maxValues;
+    meanX = meanX + (x/MAXVALUES) - meanX/MAXVALUES;
+    meanX2 = meanX2 + ((x*x)/MAXVALUES) - meanX2/MAXVALUES;
     varX = meanX2 - (meanX*meanX);
 
-    meanY = meanY + (y/maxValues) - meanY/maxValues;
-    meanY2 = meanY2 + ((y*y)/maxValues) - meanY2/maxValues;
+    meanY = meanY + (y/MAXVALUES) - meanY/MAXVALUES;
+    meanY2 = meanY2 + ((y*y)/MAXVALUES) - meanY2/MAXVALUES;
     varY = meanY2 - (meanY*meanY);
 
-    meanXY = meanXY + ((x*y)/n) - meanXY/maxValues;
+    meanXY = meanXY + ((x*y)/n) - meanXY/MAXVALUES;
 
     covarXY = meanXY - (meanX*meanY);
 
@@ -80,7 +80,7 @@ void LinearRegression::dynamicLearn(double x, double y){
         }
     }
     
-    if (n<maxValues) {
+    if (n<MAXVALUES) {
         n++;
         dynamicIsValid = false;
     } else {
@@ -90,17 +90,17 @@ void LinearRegression::dynamicLearn(double x, double y){
     mmX[mmli] = x;
     mmY[mmli] = y;
     mmli++;
-    if (mmli>= maxN) mmli = 0;
+    if (mmli>= MAXVALUES) mmli = 0;
 
-    meanX = meanX + (x/maxValues) - mmX[mmli]/maxValues;
-    meanX2 = meanX2 + ((x*x)/maxValues) - mmX[mmli]*mmX[mmli]/maxValues;
+    meanX = meanX + (x/MAXVALUES) - mmX[mmli]/MAXVALUES;
+    meanX2 = meanX2 + ((x*x)/MAXVALUES) - mmX[mmli]*mmX[mmli]/MAXVALUES;
     varX = meanX2 - (meanX*meanX);
 
-    meanY = meanY + (y/maxValues) - mmY[mmli]/maxValues;
-    meanY2 = meanY2 + ((y*y)/maxValues) - mmY[mmli]*mmY[mmli]/maxValues;
+    meanY = meanY + (y/MAXVALUES) - mmY[mmli]/MAXVALUES;
+    meanY2 = meanY2 + ((y*y)/MAXVALUES) - mmY[mmli]*mmY[mmli]/MAXVALUES;
     varY = meanY2 - (meanY*meanY);
 
-    meanXY = meanXY + ((x*y)/maxValues) - mmX[mmli]*mmY[mmli]/maxValues;
+    meanXY = meanXY + ((x*y)/MAXVALUES) - mmX[mmli]*mmY[mmli]/MAXVALUES;
 
     covarXY = meanXY - (meanX*meanY);
 
@@ -136,12 +136,12 @@ double LinearRegression::getIntercept(){
     return b;    
 }
 
-void LinearRegression::getSlope(){
+double LinearRegression::getSlope(){
     return m;
 }
 
 void LinearRegression::reset(){
-    for (i=0;i<maxValues;i++){
+    for (int i=0;i<MAXVALUES;i++){
         mmX[i]=0.0;
         mmY[i]=0.0;
     }
