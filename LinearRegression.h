@@ -1,3 +1,10 @@
+/**
+ * Linear Regression 
+ * Author: Massimiliano Scaletti
+ * Author: Javier Alcubierre Villasol (cubiwan)
+ * based on https://github.com/cubiwan/Regressino 
+ */
+
 #ifndef LinearRegression_h
 #define LinearRegression_h
 
